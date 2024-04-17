@@ -10,7 +10,15 @@ let Email = document.getElementById('email');
 let Mob = document.getElementById('mbl')
 let tbody = document.querySelector('tbody');
 
-let MainData = [];
+let MainData = JSON.parse(localStorage.getItem('MainData')) ;
+
+
+function updateLocalStorage() {
+    localStorage.setItem('MainData', JSON.stringify(MainData));
+}
+
+
+
 
 MyForm.addEventListener('submit',function(e)
 {
@@ -28,6 +36,9 @@ MyForm.addEventListener('submit',function(e)
 
 
     MainData.push(Data)
+
+    updateLocalStorage(); //update local storage
+
     console.log(MainData)
 
     tbody.innerHTML = null;
@@ -86,6 +97,7 @@ MyForm.addEventListener('submit',function(e)
 
 function deleteData(i,row){
     MainData.splice(i,1)
+    updateLocalStorage(); // local storage update
     row.innerHTML=""
 }
 
